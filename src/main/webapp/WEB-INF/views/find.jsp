@@ -24,8 +24,7 @@
 				<img alt="腾讯大讲堂 给成长加点料" src="${pageContext.request.contextPath}/images/topbar-light.jpg">
 			</div>
 			<div class="topbar-logo">
-				<a href="http://djt.qq.com/home/index/" title="返回首页"><img
-					alt="腾讯大讲堂 给成长加点料" src="${pageContext.request.contextPath}/images/logo.png"></a>
+				
 			</div>
 
 			<div class="login-container" id="login_container">
@@ -69,16 +68,16 @@
 			<div class="span4 category_list">
 				<ul class="ppt-category-list">
 					<li><a class="selected" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:null})">所有PPT<span
+						onClick="location.href=build_query(location.href,{category:null})">计算机科学与技术<span
 							class="total_events">(390)</span></a></li>
 					<li><a class="" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:16})">腾讯大讲堂系列讲座(45)</a></li>
+						onClick="location.href=build_query(location.href,{category:16})">编译原理(45)</a></li>
 					<li><a class="" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:17})">产品沙龙(31)</a></li>
+						onClick="location.href=build_query(location.href,{category:17})">数据库(31)</a></li>
 					<li><a class="" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:18})">业界大会(221)</a></li>
+						onClick="location.href=build_query(location.href,{category:18})">java编程(221)</a></li>
 					<li><a class="" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:19})">开发沙龙(71)</a></li>
+						onClick="location.href=build_query(location.href,{category:19})">计算机通信(71)</a></li>
 					<li><a class="" href="javascript:void(0);"
 						onClick="location.href=build_query(location.href,{category:22})">Tπ互联网青会年(22)</a></li>
 				</ul>
@@ -86,7 +85,7 @@
 					<div id="ppt-scbar">
 						<div class="col">
 							<input type="text" name="keyword" id="ppt-search"
-								placeholder="搜索PPT" value="">
+								placeholder="搜索" value="">
 						</div>
 						<div class="col">
 							<a class="ppt-scbar-btn"></a>
