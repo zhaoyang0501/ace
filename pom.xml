@@ -125,7 +125,11 @@
 			<version>5.1.6</version>
 		</dependency>
 		<!--mysqldriverend -->
-
+	<dependency>
+		    <groupId>jstl</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
 
 		<!--log4jstart -->
 		<dependency>
