@@ -31,7 +31,7 @@ jQuery.adminUser = {
 						$('[rel="popover"],[data-rel="popover"]').popover();
 					},
 					"fnServerData" : function(sSource, aoData, fnCallback) {
-						var userName = $("#userName").val();
+						var userName = $("#_userName").val();
 						if (!!userName) {
 							aoData.push({
 								"name" : "userName",
@@ -61,7 +61,7 @@ jQuery.adminUser = {
 					}, {
 						"mDataProp" : "sex"
 					}, {
-						"mDataProp" : "birtthDay"
+						"mDataProp" : "birthDay"
 					},{
 						"mDataProp" : ""
 					}],
@@ -69,7 +69,8 @@ jQuery.adminUser = {
 						{
 							'aTargets' : [7],
 							'fnRender' : function(oObj, sVal) {
-								return "<a class=\"btn2 btn-info\" onclick=\"$.adminUser.deleteUser("+oObj.aData.id+")\"><i class=\"icon-zoom-in\"></i> 删除</a>";
+								return "<button class=\"btn2 btn-info\" onclick=\"$.adminUser.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
+								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminUser.deleteUser("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
 							}
 						},
 					 {
@@ -96,7 +97,7 @@ jQuery.adminUser = {
 	        			success : function(json) {
 	        				if(json.resultMap.state=='success'){
 	        					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
-	        					$.ace.adminUser.initSearchDataTable();
+	        					$.adminUser.initSearchDataTable();
 	        				}else{
 	        					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
 	        				}
@@ -104,5 +105,60 @@ jQuery.adminUser = {
 	        		});
 	            }
 	        });
+		},
+		showUserAddModal: function(id){
+			$("#userid").val(id);
+			$('#user_edit_modal').modal({
+			});
+			$("#user_modal_header_label").text("新增用户信息");
+			$("#user_edit_modal").modal('show');
+		},
+		showEdit: function (id){
+			$("#userid").val(id);
+			$.ajax({
+    			type : "get",
+    			url : $.ace.getContextPath() + "/admin/user/list/get?id="+id,
+    			dataType : "json",
+    			success : function(json) {
+    				if(json.resultMap.state=='success'){
+    					$("#userName").val(json.resultMap.user.userName);
+    					$("#school").val(json.resultMap.user.school);
+    					$("#className").val(json.resultMap.user.className);
+    					$("#password").val(json.resultMap.user.password);
+    					$("#sex").val(json.resultMap.user.sex);
+    					$("#birthDay").val(json.resultMap.user.birthDay);
+    				}else{
+    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
+    				}
+    			}
+    		});
+			$("#user_edit_modal").modal('show');
+		},
+		
+		saveUser: function(id){
+			$.ajax({
+    			type : "post",
+    			url : $.ace.getContextPath() + "/admin/user/list/update",
+    			data:{
+    				"user.id":$("#userid").val(),
+    				"user.userName":$("#userName").val(),
+    				"user.school":$("#school").val(),
+    				"user.className":$("#className").val(),
+    				"user.sex":$("#sex").val(),
+    				"user.password":$("#password").val(),
+    				"user.birthDay":$("#birthDay").val()
+    			},
+    			dataType : "json",
+    			success : function(json) {
+    				if(json.resultMap.state=='success'){
+    					$("#user_edit_modal").modal('hide');
+    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
+    					$.adminUser.initSearchDataTable();
+    				
+    				}else{
+    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
+    				}
+    			}
+    		});
 		}
 };

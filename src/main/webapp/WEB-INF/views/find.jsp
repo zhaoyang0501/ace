@@ -15,41 +15,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui-1.8.22.min.js"></script>
 </head>
 <body>
-
-
-	<div class="index-topbar-wrapper">
-		<div class="light-blue-left"></div>
-		<div class="index-topbar clearfix">
-			<div class="topbar-light">
-				<img alt="腾讯大讲堂 给成长加点料" src="${pageContext.request.contextPath}/images/topbar-light.jpg">
-			</div>
-			<div class="topbar-logo">
-				
-			</div>
-
-			<div class="login-container" id="login_container">
-				<div class="user-name-wrapper">
-					<div class="user-name-inner">
-						<span class="user-name"><strong class="vwmy qq">温家宝
-						</strong>&nbsp;</span><span class="sf-sub-indicator"> ?</span>
-					</div>
-					<ul class="user-name-dropdown" style="width: 82px;">
-						<li><a href="javascript:void(0)" onClick="change_username()">修改用户名</a></li>
-						<li><a href="http://djt.qq.com/bbs/space-uid-1177537.html">个人资料</a></li>
-						<li><a
-							href="http://djt.qq.com/user/logout?ref_url=http%3A%2F%2Fdjt.qq.com%2Fppt%2Flists%2F&1177537">退出</a></li>
-					</ul>
-				</div>
-			</div>
-
-			<ul class="topbar-nav-list sf-menu" id="djt_menu">
-				<li id="nav_1"><a href="http://djt.qq.com/home/index">首页</a></li>
-				<li id="nav_3"><a href="http://djt.qq.com/article/">资源检索</a></li>
-				<li id="nav_6"><a href="http://djt.qq.com/page/178">我的上传</a></li>
-				<li id="nav_6"><a href="http://djt.qq.com/page/178">个人中心</a></li>
-			</ul>
-		</div>
-	</div>
+	<%@ include file="top.jsp"%>
 	<!----head end -->
 
 
@@ -363,15 +329,7 @@
 			</div>
 		</div>
 		<!-- 页脚 -->
-		<div id="footer" >
-			<div class="footer_menu">
-					<a class="navl" href="#">关于我们</a>
-				 |  <a class="navl" target="_blank"href="#">网站地图</a>
-				  | <a class="navl" target="_blank" href="#">RSS订阅</a>
-				|   <a class="navl" target="_blank" href="#">不良信息举报</a> |
-			</div>
-			<p style="padding-top: 5px">Copyright © 1998 - 2013 pzy. All Rights Reserved.&nbsp;&nbsp;XX公司 版权所有</p>
-		</div>
+		<%@ include file="top.jsp"%>
 	</div>
 
 </body>
