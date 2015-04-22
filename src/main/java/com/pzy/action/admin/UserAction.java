@@ -16,7 +16,7 @@ import com.pzy.entity.User;
 import com.pzy.service.UserService;
 
 @Namespace("/admin/user")
-@ParentPackage("json-default") 
+@ParentPackage("json-default")  
 public class UserAction  extends ActionSupport{
      private Integer sEcho=1;
      private Integer iDisplayStart=0;
@@ -26,15 +26,15 @@ public class UserAction  extends ActionSupport{
      private Map<String,Object> resultMap= new HashMap<String,Object>();
      @Autowired
      private UserService userService;
-     @Action(value = "/index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/user/index.jsp") })
+     @Action(value = "/index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/user/index.jsp") }) 
      public String index(){
           return SUCCESS;
      }
      /***
-       * 查找所有的用户 
+       * 查找所有的用户  
        * @return
        */
-    @Action(value = "/list", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" }) 
+    @Action(value = "/list", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
      public String list(){
          int pageNumber = (int) (iDisplayStart / iDisplayLength) + 1;
           int pageSize = iDisplayLength;
@@ -45,11 +45,58 @@ public class UserAction  extends ActionSupport{
           resultMap.put("sEcho", sEcho);
           return SUCCESS;
      }
-    
-    @Action(value = "/delete", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" }) 
+     
+    @Action(value = "/delete", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
         public String delete(){
          userService.delete(id);
          resultMap.put("state", "success");
          resultMap.put("msg", "删除成功");
              return SUCCESS;
         }
+    
+     /*~~~~~~~~get and setter~~~~~~~~~*/
+    @JSON  
+     public Map<String,Object> getResultMap() {
+          return resultMap;
+     }
+
+     public void setResultMap(Map<String,Object> resultMap) {
+          this.resultMap = resultMap;
+     }
+     public Integer getSEcho() {
+          return sEcho;
+     }
+
+     public void setSEcho(Integer sEcho) {
+          this.sEcho = sEcho;
+     }
+
+     public Integer getIDisplayStart() {
+          return iDisplayStart;
+     }
+
+     public void setIdisplayStart(Integer idisplayStart) {
+          this.iDisplayStart = idisplayStart;
+     }
+
+     public Integer getIDisplayLength() {
+          return iDisplayLength;
+     }
+
+     public void setIDisplayLength(Integer iDisplayLength) {
+          this.iDisplayLength = iDisplayLength;
+     }
+     public String getUserName() {
+          return userName;
+     }
+
+     public void setUserName(String userName) {
+          this.userName = userName;
+     }
+     public Long getId() {
+          return id;
+     }
+     public void setId(Long id) {
+          this.id = id;
+     }
+}
