@@ -48,7 +48,7 @@
 			</div>
 		</div>
 		<!-- 页脚 -->
-		<%@ include file="top.jsp"%>
+		<%@ include file="foot.jsp"%>
 	</div>
 
 </body>

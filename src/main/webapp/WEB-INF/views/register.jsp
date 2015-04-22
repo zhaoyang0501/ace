@@ -43,7 +43,7 @@
 		<div class="row" style="padding-top: 15px;">
 		
 			<div class="span12" >
-			<h1>新用户注册</h1>
+			<h3>新用户注册</h3>
 					<form class="form-horizontal center"  method="post" action="${pageContext.request.contextPath}/registerUser" style="border: 1px solid #E2E2E2;padding-top: 20px;">
 					  <div class="control-group">
 					    <label class="control-label" for="userName">用户名</label>
@@ -62,7 +62,7 @@
 					   <div class="control-group">
 					    <label class="control-label" for="user.school">学校</label>
 					    <div class="controls">
-					      <input type="text" name="user.school" placeholder="">
+					      <input type="email" name="user.school" placeholder="">
 					    </div>
 					  </div>
 					  
@@ -103,7 +103,7 @@
 			</div>
 		</div>
 		<!-- 页脚 -->
-		<%@ include file="top.jsp"%>
+		<%@ include file="foot.jsp"%>
 	</div>
 
 </body>

@@ -51,4 +51,8 @@ public class UserService {
      public void save(User User){
     	 userRepository.save(User);
      }
+     public User login(String userName,String password){
+    	 List<User> users=userRepository.findByuserNameAndPassword(userName,password);
+    	 return users.size()==0?null:users.get(0);
+     }
 }
