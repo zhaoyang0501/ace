@@ -1,5 +1,6 @@
 package com.pzy.action.admin;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,7 +78,15 @@ public class CategoryAction extends ActionSupport {
 		resultMap.put("msg", "修改成功");
 		return SUCCESS;
 	}
-
+	@Action(value = "save", results = { @Result(name = "success", type = "json") }, params = {
+			"contentType", "text/html" })
+	public String save() {
+		category.setCreateDate(new Date(System.currentTimeMillis()));
+		categoryService.save(category);
+		resultMap.put("state", "success");
+		resultMap.put("msg", "保存成功");
+		return SUCCESS;
+	}
 	/* ~~~~~~~~get and setter~~~~~~~~~ */
 	@JSON
 	public Map<String, Object> getResultMap() {

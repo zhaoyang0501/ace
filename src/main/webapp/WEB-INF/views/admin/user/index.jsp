@@ -4,10 +4,8 @@
 <html lang="ch">
 <%@ include file="../common/meta.jsp"%>
 <head>
-<link href="${pageContext.request.contextPath}/css/chosen.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/ace/admin.user.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/falgun/bootbox.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/falgun/chosen.jquery.js"></script>
 <script src="${pageContext.request.contextPath}/admin/js/falgun/bootstrap-datetimepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/admin/js/falgun/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript">

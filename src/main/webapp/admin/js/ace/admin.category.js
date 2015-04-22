@@ -1,5 +1,6 @@
 jQuery.adminCategory = {
 		categoryDataTable:null,
+		toSave:false,
 		initSearchDataTable : function() {
 			if (this.categoryDataTable == null) {
 				this.categoryDataTable = $('#dt_category_view').dataTable({
@@ -31,8 +32,8 @@ jQuery.adminCategory = {
 						$('[rel="popover"],[data-rel="popover"]').popover();
 					},
 					"fnServerData" : function(sSource, aoData, fnCallback) {
-						var userName = $("#category_name").val();
-						if (!!userName) {
+						var name = $("#category_name").val();
+						if (!!name) {
 							aoData.push({
 								"name" : "name",
 								"value" : name
@@ -56,13 +57,15 @@ jQuery.adminCategory = {
 						"mDataProp" : "remark"
 					}, {
 						"mDataProp" : "createDate"
+					}, {
+						"mDataProp" : ""
 					}],
 					"aoColumnDefs" : [
 						{
-							'aTargets' : [3],
+							'aTargets' : [4],
 							'fnRender' : function(oObj, sVal) {
-								return "<button class=\"btn2 btn-info\" onclick=\"$.adminUser.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
-								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminUser.deleteUser("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
+								return "<button class=\"btn2 btn-info\" onclick=\"$.adminCategory.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
+								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminCategory.deleteCategory("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
 							}
 						},
 					 {
@@ -79,17 +82,17 @@ jQuery.adminCategory = {
 			}
 
 		},
-		deleteUser :function(id){
+		deleteCategory :function(id){
 			bootbox.confirm( "是否确认删除？", function (result) {
 	            if(result){
 	            	$.ajax({
 	        			type : "get",
-	        			url : $.ace.getContextPath() + "/admin/user/list/delete?id="+id,
+	        			url : $.ace.getContextPath() + "/admin/category/delete?id="+id,
 	        			dataType : "json",
 	        			success : function(json) {
 	        				if(json.resultMap.state=='success'){
 	        					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
-	        					$.adminUser.initSearchDataTable();
+	        					$.adminCategory.initSearchDataTable();
 	        				}else{
 	        					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
 	        				}
@@ -98,55 +101,68 @@ jQuery.adminCategory = {
 	            }
 	        });
 		},
-		showUserAddModal: function(id){
-			$("#userid").val(id);
-			$('#user_edit_modal').modal({
-			});
-			$("#user_modal_header_label").text("新增用户信息");
-			$("#user_edit_modal").modal('show');
+		showaddModal: function(id){
+			$.adminCategory.toSave=true;
+			$("#user_modal_header_label").text("新增分类");
+			$("#category_modal").modal('show');
+		},
+		save : function (){
+			if($.adminCategory.toSave){
+				$.ajax({
+	    			type : "post",
+	    			url : $.ace.getContextPath() + "/admin/category/save",
+	    			data:{
+	    				"category.name":$("#name").val(),
+	    				"category.remark":$("#remark").val()
+	    			},
+	    			dataType : "json",
+	    			success : function(json) {
+	    				if(json.resultMap.state=='success'){
+	    					$("#user_edit_modal").modal('hide');
+	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
+	    					$.adminCategory.initSearchDataTable();
+	    					$("#category_modal").modal('hide');
+	    				}else{
+	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
+	    				}
+	    			}
+	    		});
+			}else{
+				$.ajax({
+	    			type : "post",
+	    			url : $.ace.getContextPath() + "/admin/category/update",
+	    			data:{
+	    				"category.id":$("#categoryId").val(),
+	    				"category.name":$("#name").val(),
+	    				"category.remark":$("#remark").val()
+	    			},
+	    			dataType : "json",
+	    			success : function(json) {
+	    				if(json.resultMap.state=='success'){
+	    					$("#user_edit_modal").modal('hide');
+	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
+	    					$.adminCategory.initSearchDataTable();
+	    					$("#category_modal").modal('hide');
+	    				}else{
+	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
+	    				}
+	    			}
+	    		});
+			}
 		},
 		showEdit: function (id){
-			$("#userid").val(id);
+			$("#categoryId").val(id);
+			$.adminCategory.toSave=false;
 			$.ajax({
     			type : "get",
-    			url : $.ace.getContextPath() + "/admin/user/list/get?id="+id,
+    			url : $.ace.getContextPath() + "/admin/category/get?id="+id,
     			dataType : "json",
     			success : function(json) {
     				if(json.resultMap.state=='success'){
-    					$("#userName").val(json.resultMap.user.userName);
-    					$("#school").val(json.resultMap.user.school);
-    					$("#className").val(json.resultMap.user.className);
-    					$("#password").val(json.resultMap.user.password);
-    					$("#sex").val(json.resultMap.user.sex);
-    					$("#birthDay").val(json.resultMap.user.birthDay);
-    				}else{
-    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
-    				}
-    			}
-    		});
-			$("#user_edit_modal").modal('show');
-		},
-		
-		saveUser: function(id){
-			$.ajax({
-    			type : "post",
-    			url : $.ace.getContextPath() + "/admin/user/list/update",
-    			data:{
-    				"user.id":$("#userid").val(),
-    				"user.userName":$("#userName").val(),
-    				"user.school":$("#school").val(),
-    				"user.className":$("#className").val(),
-    				"user.sex":$("#sex").val(),
-    				"user.password":$("#password").val(),
-    				"user.birthDay":$("#birthDay").val()
-    			},
-    			dataType : "json",
-    			success : function(json) {
-    				if(json.resultMap.state=='success'){
-    					$("#user_edit_modal").modal('hide');
-    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
-    					$.adminUser.initSearchDataTable();
-    				
+    					$("#user_modal_header_label").text("修改分类");
+    					$("#category_modal").modal('show');
+    					$("#name").val(json.resultMap.category.name);
+    					$("#remark").val(json.resultMap.category.remark);
     				}else{
     					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
     				}
