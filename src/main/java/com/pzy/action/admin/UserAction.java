@@ -23,10 +23,10 @@ public class UserAction  extends ActionSupport{
      private Integer iDisplayLength=10;
      private String userName;
      private Long id;
-     private Map<String,Object> resultMap= new HashMap<String,Object>();
+	private Map<String,Object> resultMap= new HashMap<String,Object>();
      @Autowired
      private UserService userService;
-     @Action(value = "/index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/user/index.jsp") }) 
+     @Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/user/index.jsp") }) 
      public String index(){
           return SUCCESS;
      }
@@ -53,7 +53,28 @@ public class UserAction  extends ActionSupport{
          resultMap.put("msg", "删除成功");
              return SUCCESS;
         }
+    @Action(value = "/get", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
+    public String get(){
+     resultMap.put("user", userService.find(id));
+     resultMap.put("state", "success");
+     resultMap.put("msg", "删除成功");
+         return SUCCESS;
+    }
     
+    @Action(value = "/update", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
+    public String update(){
+    User userToupdate= userService.find(user.getId());
+    userToupdate.setBirthDay(user.getBirthDay());
+    userToupdate.setClassName(user.getClassName());
+    userToupdate.setPassword(user.getPassword());
+    userToupdate.setSchool(user.getSchool());
+    userToupdate.setSex(user.getSex());
+    userToupdate.setUserName(user.getUserName());
+    userService.save(userToupdate);
+     resultMap.put("state", "success");
+     resultMap.put("msg", "修改成功");
+     return SUCCESS;
+    }
      /*~~~~~~~~get and setter~~~~~~~~~*/
     @JSON  
      public Map<String,Object> getResultMap() {
@@ -99,4 +120,11 @@ public class UserAction  extends ActionSupport{
      public void setId(Long id) {
           this.id = id;
      }
+     private User user;
+     public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 }
