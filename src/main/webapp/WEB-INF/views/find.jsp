@@ -33,19 +33,13 @@
 		<div class="row" style="padding-top: 15px;">
 			<div class="span4 category_list">
 				<ul class="ppt-category-list">
-					<li><a class="selected" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:null})">计算机科学与技术<span
-							class="total_events">(390)</span></a></li>
-					<li><a class="" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:16})">编译原理(45)</a></li>
-					<li><a class="" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:17})">数据库(31)</a></li>
-					<li><a class="" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:18})">java编程(221)</a></li>
-					<li><a class="" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:19})">计算机通信(71)</a></li>
-					<li><a class="" href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:22})">Tπ互联网青会年(22)</a></li>
+				<li><a class="selected"  href="javascript:void(0);"
+						onClick="location.href=build_query(location.href,{category:null})">所有资源</a></li>
+				<c:forEach items="${categorys }" var="bean">
+				<li><a  href="javascript:void(0);"
+						onClick="location.href=build_query(location.href,{category:null})">${bean.name }</a></li>
+				</c:forEach>
+					
 				</ul>
 				<form id="ppt-scbar-form" method="get" action="">
 					<div id="ppt-scbar">
@@ -329,7 +323,7 @@
 			</div>
 		</div>
 		<!-- 页脚 -->
-		<%@ include file="top.jsp"%>
+		<%@ include file="foot.jsp"%>
 	</div>
 
 </body>

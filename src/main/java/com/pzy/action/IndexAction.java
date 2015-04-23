@@ -48,8 +48,9 @@ public class IndexAction extends ActionSupport implements SessionAware {
         return SUCCESS;  
     } 
     @Action(value = "find", results = { @Result(name = "success", location = "/WEB-INF/views/find.jsp") })  
-    public String find() throws Exception {  
-        return SUCCESS;  
+    public String find() throws Exception { 
+    	categorys=this.categoryService.findAll();
+    	return SUCCESS;  
     }
     @Action(value = "goupload", results = { @Result(name = "success", location = "/WEB-INF/views/goupload.jsp") })  
     public String goupload() throws Exception { 
