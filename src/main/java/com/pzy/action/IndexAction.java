@@ -1,5 +1,6 @@
 package com.pzy.action;  
   
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.pzy.entity.Category;
 import com.pzy.entity.User;
+import com.pzy.service.CategoryService;
 import com.pzy.service.UserService;
  
 @ParentPackage("struts-default")  
@@ -18,8 +21,12 @@ public class IndexAction extends ActionSupport implements SessionAware {
 	private Map<String,Object> session;
 	private User user;
 	private String tip;
+	private List<Category> categorys;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private CategoryService categoryService;
+	
 	
 	@Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/index.jsp") })  
     public String index() throws Exception {  
@@ -32,7 +39,16 @@ public class IndexAction extends ActionSupport implements SessionAware {
     @Action(value = "register", results = { @Result(name = "success", location = "/WEB-INF/views/register.jsp") })  
     public String register() throws Exception {  
         return SUCCESS;  
-    }  
+    } 
+    @Action(value = "find", results = { @Result(name = "success", location = "/WEB-INF/views/find.jsp") })  
+    public String find() throws Exception {  
+        return SUCCESS;  
+    }
+    @Action(value = "myupload", results = { @Result(name = "success", location = "/WEB-INF/views/myupload.jsp") })  
+    public String myupload() throws Exception {  
+    	categorys=this.categoryService.findAll();
+    	return SUCCESS;  
+    }
     @Action(value = "registerUser", results = { @Result(name = "success", location = "/WEB-INF/views/registerok.jsp") })  
     public String registerUser() throws Exception {  
     	userService.save(user);
@@ -51,7 +67,7 @@ public class IndexAction extends ActionSupport implements SessionAware {
     		results = { @Result(name = "success", location = "/WEB-INF/views/index.jsp") ,
     					@Result(name = "login", location = "/WEB-INF/views/login.jsp") })  
     public String dologin() throws Exception { 
-    	User loginuser=userService.login(user.getClassName(), user.getPassword());
+    	User loginuser=userService.login(user.getUserName(), user.getPassword());
     	if(loginuser!=null){
     		session.put("user",loginuser );
             return SUCCESS; 
@@ -80,5 +96,11 @@ public class IndexAction extends ActionSupport implements SessionAware {
 	}
 	public void setTip(String tip) {
 		this.tip = tip;
+	}
+	public List<Category> getCategorys() {
+		return categorys;
+	}
+	public void setCategorys(List<Category> categorys) {
+		this.categorys = categorys;
 	}
 }
