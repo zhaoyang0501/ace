@@ -16,6 +16,7 @@
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <link href="${pageContext.request.contextPath}/css/datetimepicker.css" rel="stylesheet">
+<link href="http://djt.qq.com/djt/css/article/article.css?v=v21375" rel="stylesheet">
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".date").datetimepicker({
@@ -31,6 +32,18 @@
 	    });
 	});
 </script>
+<style type="text/css">
+.event-apply-wrapper .btn {
+  width: 150px;
+  line-height: 40px;
+  padding: 0;
+  font-size: 16px;
+  margin: 0 auto;
+  background-image: none;
+  background-color: #009CFF;
+  color: #FFF;
+}
+</style>
 </head>
 <body>
 	<%@ include file="top.jsp"%>
@@ -41,59 +54,49 @@
 	<div class="container">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/ppts.css">
 		<div class="row" style="padding-top: 15px;">
-		
-			<div class="span12" >
-			<h3>上传资源</h3>
-					<form class="form-horizontal center" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/doUpload" style="border: 1px solid #E2E2E2;padding-top: 20px;">
-					  <div class="control-group">
-					    <label class="control-label" for="userName">资源名称</label>
-					    <div class="controls">
-					      <input type="text" id="userName" name="resource.name" placeholder="">
-					    </div>
-					  </div>
-					   <div class="control-group">
-					    <label class="control-label" for="userName">类别</label>
-					    <div class="controls">
-					     	<select name='categoryId'>
-					     		<c:forEach items="${categorys }" var="bean">
-					     			<option value="${bean.id }">${bean.name }</option>
-					     		</c:forEach>
-					     	</select>
-					    </div>
-					  </div>
-					  
-					 
-					  <div class="control-group">
-					    <label class="control-label" for="password">缩略图</label>
-					    <div class="controls">
-					      <input name='imgPath' type="file" class="file">
-					    </div>
-					  </div>
-					   <div class="control-group">
-					    <label class="control-label" for="user.school">选择文件</label>
-					    <div class="controls">
-					      <input name='filePath' type="file" class="file">
-					    </div>
-					  </div>
-					  
-					   <div class="control-group">
-					    <label class="control-label" for="password">描述</label>
-					    <div class="controls">
-					      <textarea rows="3" cols="" name='resource.remark'></textarea>
-					    </div>
-					  </div>
-					  
-					  <div class="control-group">
-					    <div class="controls">
-					      <button type="submit" class="btn">上传</button>
-					    </div>
-					  </div>
-				</form>
-			</div>
+			<div class="span8">
+				<ul class="article-list">
+				<c:forEach items="${resources}" var="bean">
+					<li class="article-list-item "> 
+						<div class="item-cover">
+							<a href="#"><img width="106px;" alt="${bean.name }" src="${pageContext.request.contextPath}/upload/${bean.imgPath}"></a>
+						</div>
+						<div class="item-detail">
+							<h1><a href="#">${bean.name }</a> 
+							<div class="btn-group pull-right">
+				                <button class="btn dropdown-toggle" data-toggle="dropdown">操作 <span class="caret"></span></button>
+				                <ul class="dropdown-menu">
+				                  <li><a href="${pageContext.request.contextPath}/goupload?resource.id=${bean.id }">编辑</a></li>
+				                  <li><a href="${pageContext.request.contextPath}/deleteResource?resource.id=${bean.id }">删除</a></li>
+				                </ul>
+				              </div>
+							 </h1>
+							<p class="item-author">${bean.creater.userName} &nbsp;${bean.createDate }</p>
+							<p class="item-summary">${bean.remark }</p>
+							<div class="item-control">
+								<div class="item-oper-info">
+									<span><i class="icon-reading"></i>&nbsp;348浏览&nbsp;&nbsp;</span> 
+								</div>
+							</div>
+						</div>
+					</li>
+				</c:forEach>
+		</ul>
+	</div><!-- left end span12 -->
+	<div class='span4'>
+	<div class="event-apply-wrapper left" style="  padding: 20px 15px;background: #f0f0f0;text-align: center;height: 100%" >
+			<p>上传你的资源文件吧</p>
+			<a href="./goupload" class="btn btn-success event-apply" data-toggle="modal" >上   传</a>
 		</div>
+	
+	
+	</div>
+</div>
+</div>
+</div>
 		<!-- 页脚 -->
 		<%@ include file="foot.jsp"%>
-	</div>
+</div>
 
 </body>
 </html>

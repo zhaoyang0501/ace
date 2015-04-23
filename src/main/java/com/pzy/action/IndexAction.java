@@ -3,6 +3,7 @@ package com.pzy.action;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -12,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pzy.entity.Category;
+import com.pzy.entity.Resource;
 import com.pzy.entity.User;
 import com.pzy.service.CategoryService;
+import com.pzy.service.ResourceService;
 import com.pzy.service.UserService;
  
 @ParentPackage("struts-default")  
@@ -26,7 +29,11 @@ public class IndexAction extends ActionSupport implements SessionAware {
 	private UserService userService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private ResourceService resourceService;
+	private List<Resource> resources;
 	
+	private Resource resource;
 	
 	@Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/index.jsp") })  
     public String index() throws Exception {  
@@ -44,9 +51,17 @@ public class IndexAction extends ActionSupport implements SessionAware {
     public String find() throws Exception {  
         return SUCCESS;  
     }
-    @Action(value = "myupload", results = { @Result(name = "success", location = "/WEB-INF/views/myupload.jsp") })  
-    public String myupload() throws Exception {  
+    @Action(value = "goupload", results = { @Result(name = "success", location = "/WEB-INF/views/goupload.jsp") })  
+    public String goupload() throws Exception { 
+    	if(resource!=null)
+    		resource=resourceService.find(resource.getId());
     	categorys=this.categoryService.findAll();
+    	return SUCCESS;  
+    }
+	@Action(value = "myupload", results = { @Result(name = "success", location = "/WEB-INF/views/myupload.jsp") })  
+    public String myupload() throws Exception {
+    	User user = (User) ServletActionContext.getRequest().getSession().getAttribute("user");
+    	this.resources=resourceService.find(user);
     	return SUCCESS;  
     }
     @Action(value = "registerUser", results = { @Result(name = "success", location = "/WEB-INF/views/registerok.jsp") })  
@@ -103,4 +118,16 @@ public class IndexAction extends ActionSupport implements SessionAware {
 	public void setCategorys(List<Category> categorys) {
 		this.categorys = categorys;
 	}
+	public List<Resource> getResources() {
+		return resources;
+	}
+	public void setResources(List<Resource> resources) {
+		this.resources = resources;
+	}
+	 public Resource getResource() {
+			return resource;
+		}
+		public void setResource(Resource resource) {
+			this.resource = resource;
+		}
 }

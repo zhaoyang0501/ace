@@ -33,6 +33,7 @@ public class MyUploadAction extends ActionSupport implements SessionAware {
     private String filePathFileName; 
     private Resource resource;
     private Long categoryId;
+    private String tip;
 	@Autowired
     private ResourceService resourceService;
     @Autowired
@@ -42,8 +43,16 @@ public class MyUploadAction extends ActionSupport implements SessionAware {
 		// TODO Auto-generated method stub
 		
 	}
+	@Action(value = "deleteResource", results = { @Result( type="redirect" ,name = "success", location = "myupload") })  
+	public String deleteResource(){
+		resourceService.delete(resource.getId());
+		tip="删除成功";
+		return SUCCESS;
+	}
+	
 	@Action(value = "doUpload", results = { @Result(name = "success", location = "/WEB-INF/views/okupload.jsp") })  
 	public String doUpload(){
+		System.out.print("fuck you ");
 		resource.setCreateDate(new Date(System.currentTimeMillis()));
 		User user = (User) ServletActionContext.getRequest().getSession().getAttribute("user");
 		resource.setCreater(user);
@@ -113,5 +122,11 @@ public class MyUploadAction extends ActionSupport implements SessionAware {
 		}
 		public void setCategoryId(Long categoryId) {
 			this.categoryId = categoryId;
+		}
+		public String getTip() {
+			return tip;
+		}
+		public void setTip(String tip) {
+			this.tip = tip;
 		}
 }
