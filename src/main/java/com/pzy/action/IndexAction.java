@@ -49,6 +49,7 @@ public class IndexAction extends ActionSupport implements SessionAware {
     } 
     @Action(value = "find", results = { @Result(name = "success", location = "/WEB-INF/views/find.jsp") })  
     public String find() throws Exception { 
+    	resources=this.resourceService.findAll();
     	categorys=this.categoryService.findAll();
     	return SUCCESS;  
     }

@@ -57,246 +57,28 @@
 			<div class="span8 ppt-list-wrapper">
 
 				<ul class="ppt-list ppt-lists-content">
+				<c:forEach items="${resources}" var="bean">
 					<li>
 						<div>
 							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/462"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/26104141251.gif">
+								<a href="detail?id=${bean.id}"> 
+								<img width="180" height="135" alt="${bean.name }" src="${pageContext.request.contextPath}/upload/${bean.imgPath}"
 								</a>
 							</div>
 							<p class="subject">
-								<a href="http://djt.qq.com/ppt/462">京东商城双十一技术实战 </a>
+								<a href="#">${bean.name } </a>
 							</p>
 							<div class="ppt-visit-count">
 								<div class="float-left">
 									<span>6803 浏览</span>
 								</div>
 								<div class="float-right">
-									<span>2015-1-26</span>
+									<span>${bean.createDate }</span>
 								</div>
 							</div>
 						</div>
 					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/460"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/26104014475.gif">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/460">当当价格系统架构分析 </a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>6532 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2015-1-26</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/461"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/26103932616.gif">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/461">乐蜂网前端数据收集方案及架构 </a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>6082 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2015-1-26</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/459"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/240_180_27100946283.jpg">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/459">2014WOT技术峰会深圳站（腾讯安全平台部江虎）</a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>7831 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2014-11-27</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/458"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/240_180_03154232220.jpg">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/458">58同城推荐系统设计与实现</a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>10424 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2014-11-3</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/457"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/240_180_03145437403.jpg">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/457">APM 大数据在安全方面的应用</a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>9208 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2014-11-3</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/456"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/240_180_03145332512.jpg">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/456">主机卫士主动防御</a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>6493 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2014-11-3</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/455"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/240_180_29095352811.png">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/455">开放，前所未见</a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>1570 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2014-9-29</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/454"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/240_180_29095249480.png">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/454">透过QQ群看产品设计</a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>2247 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2014-9-29</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/453"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/240_180_29095145458.png">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/453">揭秘天天飞车</a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>2754 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2014-9-29</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/452"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/240_180_29095053661.png">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/452">QQ大数据及其应用介绍</a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>4730 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2014-9-29</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div>
-							<div class="ppt-cover-content">
-								<a href="http://djt.qq.com/ppt/451"> <img width="180"
-									height="135" src="${pageContext.request.contextPath}/images/240_180_29094929789.png">
-								</a>
-							</div>
-							<p class="subject">
-								<a href="http://djt.qq.com/ppt/451">模式识别技术在微信中的应用</a>
-							</p>
-							<div class="ppt-visit-count">
-								<div class="float-left">
-									<span>4292 浏览</span>
-								</div>
-								<div class="float-right">
-									<span>2014-9-29</span>
-								</div>
-							</div>
-						</div>
-					</li>
+				</c:forEach>
 				</ul>
 
 
