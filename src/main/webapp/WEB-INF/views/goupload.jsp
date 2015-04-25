@@ -17,6 +17,7 @@
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <link href="${pageContext.request.contextPath}/css/datetimepicker.css" rel="stylesheet">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".date").datetimepicker({
@@ -30,6 +31,25 @@
 			minView: 2,
 			forceParse: 0
 	    });
+		var formvalidate= $("#resource_form").validate({
+			errorPlacement: function(error, element) {
+				$( element ).closest(".controls").append( error );
+			},
+			ignore:"",
+			rules: {
+				"resource.name":  "required",
+				"categoryId":  "required",
+				"imgPath":  "required",
+				"filePath":  "required"
+				},
+			messages: {
+				"resource.name":  "请填写资源名称",
+				"categoryId":  "请选择资源类别",
+				"imgPath":  "请上传缩略图图片",
+				"filePath":  "请上传资源文件"
+				
+			}
+		});
 	});
 </script>
 </head>
@@ -45,7 +65,7 @@
 		
 			<div class="span12" >
 			<h3> ${ resource.id ==null?"上传资源":"修改资源"}</h3>
-					<form class="form-horizontal center" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/doUpload" style="border: 1px solid #E2E2E2;padding-top: 20px;">
+					<form id='resource_form' class="form-horizontal center" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/doUpload" style="border: 1px solid #E2E2E2;padding-top: 20px;">
 					  <input type="hidden" name='resource.id' value="${resource.id }">
 					  <div class="control-group">
 					    <label class="control-label" for="userName">资源名称</label>
@@ -59,7 +79,12 @@
 					     	<select name='categoryId' value="${resource.category.id }">
 					     	<option value=""></option>
 					     		<c:forEach items="${categorys }" var="bean">
+					     		<c:if test="${resource.category.id==bean.id}">
+					     			<option selected="selected" value="${bean.id }">${bean.name }</option>
+					     		</c:if>
+					     		<c:if test="${resource.category.id!=bean.id}">
 					     			<option value="${bean.id }">${bean.name }</option>
+					     		</c:if>
 					     		</c:forEach>
 					     	</select>
 					    </div>
@@ -69,7 +94,7 @@
 					  <div class="control-group">
 					    <label class="control-label" for="password">缩略图</label>
 					    <div class="controls">
-					      <input name='imgPath' type="file" class="file">
+					      <input name='imgPath' type="file" class="file" >
 					    </div>
 					  </div>
 					   <div class="control-group">

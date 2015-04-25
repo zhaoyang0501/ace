@@ -48,9 +48,8 @@ public class MyUploadAction extends ActionSupport implements SessionAware {
 		return SUCCESS;
 	}
 	
-	@Action(value = "doUpload", results = { @Result(name = "success", location = "/WEB-INF/views/okupload.jsp") })  
+	@Action(value = "doUpload", results = { @Result(name = "success", location = "/WEB-INF/views/msg.jsp") })  
 	public String doUpload(){
-		System.out.print("fuck you ");
 		resource.setCreateDate(new Date(System.currentTimeMillis()));
 		User user = (User) ServletActionContext.getRequest().getSession().getAttribute("user");
 		resource.setCreater(user);
@@ -70,6 +69,7 @@ public class MyUploadAction extends ActionSupport implements SessionAware {
 			e.printStackTrace();
 			return ERROR;
 		}
+         tip="上传成功";
 		return SUCCESS;
 	}
 	/***~~~~~~~~~~~~~getter setter~~~~~~~~~~~~~~~~~~~*/

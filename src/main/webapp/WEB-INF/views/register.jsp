@@ -16,6 +16,7 @@
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <link href="${pageContext.request.contextPath}/css/datetimepicker.css" rel="stylesheet">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".date").datetimepicker({
@@ -29,6 +30,31 @@
 			minView: 2,
 			forceParse: 0
 	    });
+		
+		var formvalidate= $("#regist_form").validate({
+			errorPlacement: function(error, element) {
+				$( element ).closest(".controls").append( error );
+			},
+			ignore:"",
+			rules: {
+				"user.userName":  "required",
+				"user.password":  "required",
+				"user.school":  "required",
+				"user.className":  "required",
+				"user.sex":  "required",
+				"user.birthDay":  "required",
+				},
+			messages: {
+				"user.userName":"请填写用户名",
+				"user.password":"请填写密码",
+				"user.school":"请填写学校",
+				"user.className":"请填写班级",
+				"user.sex":"请选择性别",
+				"user.birthDay":"请选择生日"
+				
+			}
+		});
+		
 	});
 </script>
 </head>
@@ -44,7 +70,7 @@
 		
 			<div class="span12" >
 			<h3>新用户注册</h3>
-					<form class="form-horizontal center"  method="post" action="${pageContext.request.contextPath}/registerUser" style="border: 1px solid #E2E2E2;padding-top: 20px;">
+					<form class="form-horizontal center" id='regist_form' method="post" action="${pageContext.request.contextPath}/registerUser" style="border: 1px solid #E2E2E2;padding-top: 20px;">
 					  <div class="control-group">
 					    <label class="control-label" for="userName">用户名</label>
 					    <div class="controls">
@@ -55,14 +81,14 @@
 					  <div class="control-group">
 					    <label class="control-label" for="password">密码</label>
 					    <div class="controls">
-					      <input type="text" name="user.password" placeholder="">
+					      <input type="password" name="user.password" placeholder="">
 					    </div>
 					  </div>
 					  
 					   <div class="control-group">
 					    <label class="control-label" for="user.school">学校</label>
 					    <div class="controls">
-					      <input type="email" name="user.school" placeholder="">
+					      <input type="text" name="user.school" placeholder="">
 					    </div>
 					  </div>
 					  
