@@ -32,11 +32,14 @@ public class IndexAction extends ActionSupport implements SessionAware {
 	@Autowired
 	private ResourceService resourceService;
 	private List<Resource> resources;
-	
+	private List<Resource> resourcesHot;
+	private List<Resource> resourcesNew;
 	private Resource resource;
 	
 	@Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/index.jsp") })  
-    public String index() throws Exception {  
+    public String index() throws Exception { 
+		resourcesHot=resourceService.findHot();
+		resourcesNew=resourceService.findNew();
         return SUCCESS;  
     }  
     @Action(value = "center", results = { @Result(name = "success", location = "/WEB-INF/views/center.jsp") })  
@@ -81,7 +84,7 @@ public class IndexAction extends ActionSupport implements SessionAware {
         return SUCCESS;  
     } 
     @Action(value = "dologin", 
-    		results = { @Result(name = "success", location = "/WEB-INF/views/index.jsp") ,
+    		results = { @Result(name = "success" ,type="redirect", location = "index") ,
     					@Result(name = "login", location = "/WEB-INF/views/login.jsp") })  
     public String dologin() throws Exception { 
     	User loginuser=userService.login(user.getUserName(), user.getPassword());
@@ -98,38 +101,64 @@ public class IndexAction extends ActionSupport implements SessionAware {
     		 
     } 
     /**setter getter~~~~~~~~~~~~~*/
-    public User getUser() {
+	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	@Override
 	public void setSession(Map<String, Object> arg0) {
-		this.session=arg0;
+		this.session = arg0;
 	}
+
 	public String getTip() {
 		return tip;
 	}
+
 	public void setTip(String tip) {
 		this.tip = tip;
 	}
+
 	public List<Category> getCategorys() {
 		return categorys;
 	}
+
 	public void setCategorys(List<Category> categorys) {
 		this.categorys = categorys;
 	}
+
 	public List<Resource> getResources() {
 		return resources;
 	}
+
 	public void setResources(List<Resource> resources) {
 		this.resources = resources;
 	}
-	 public Resource getResource() {
-			return resource;
-		}
-		public void setResource(Resource resource) {
-			this.resource = resource;
-		}
+
+	public Resource getResource() {
+		return resource;
+	}
+
+	public void setResource(Resource resource) {
+		this.resource = resource;
+	}
+
+	public List<Resource> getResourcesHot() {
+		return resourcesHot;
+	}
+
+	public void setResourcesHot(List<Resource> resourcesHot) {
+		this.resourcesHot = resourcesHot;
+	}
+
+	public List<Resource> getResourcesNew() {
+		return resourcesNew;
+	}
+
+	public void setResourcesNew(List<Resource> resourcesNew) {
+		this.resourcesNew = resourcesNew;
+	}
 }

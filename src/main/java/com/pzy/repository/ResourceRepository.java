@@ -8,7 +8,7 @@ import com.pzy.entity.Category;
 import com.pzy.entity.Resource;
 import com.pzy.entity.User;
 public interface ResourceRepository extends PagingAndSortingRepository<Resource, Long>,JpaSpecificationExecutor<Resource>{
-public List<Resource> findByCreater(User user);
-public List<Resource> findByCategory(Category user);
+	public List<Resource> findByCreater(User user);
+	public List<Resource> findByCategory(Category user);
 }
 

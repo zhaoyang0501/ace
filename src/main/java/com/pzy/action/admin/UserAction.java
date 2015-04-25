@@ -34,7 +34,7 @@ public class UserAction  extends ActionSupport{
        * 查找所有的用户  
        * @return
        */
-    @Action(value = "/list", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
+    @Action(value = "list", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
      public String list(){
          int pageNumber = (int) (iDisplayStart / iDisplayLength) + 1;
           int pageSize = iDisplayLength;
@@ -46,14 +46,14 @@ public class UserAction  extends ActionSupport{
           return SUCCESS;
      }
      
-    @Action(value = "/delete", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
+    @Action(value = "delete", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
         public String delete(){
          userService.delete(id);
          resultMap.put("state", "success");
          resultMap.put("msg", "删除成功");
              return SUCCESS;
         }
-    @Action(value = "/get", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
+    @Action(value = "get", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
     public String get(){
      resultMap.put("user", userService.find(id));
      resultMap.put("state", "success");
@@ -61,7 +61,7 @@ public class UserAction  extends ActionSupport{
          return SUCCESS;
     }
     
-    @Action(value = "/update", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
+    @Action(value = "update", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
     public String update(){
     User userToupdate= userService.find(user.getId());
     userToupdate.setBirthDay(user.getBirthDay());

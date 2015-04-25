@@ -27,7 +27,7 @@
 				<ul id="nav" class="accordion-nav" >
 					<li><a href="${pageContext.request.contextPath}/admin/user/index"><i class="icon-pencil"></i> 日报填写</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/category/index"><i class="icon-upload"></i> 周报提交 </a></li>
-					<li><a href="${pageContext.request.contextPath}/dailyReport/viewDailyReport"><i class="icon-zoom-in"></i> 日报查询 </a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/resource/index"><i class="icon-zoom-in"></i> 日报查询 </a></li>
 					<li><a href="${pageContext.request.contextPath}/dailyReport/viewWeekReport"><i class="icon-zoom-out"></i> 周报查询</a></li>
 					<li><a href="${pageContext.request.contextPath}/dailyReport/weekReportExport"><i class="icon-download-alt"></i> 周报导出</a></li>
 					<li><a href="${pageContext.request.contextPath}/dailyReport/weekReportState"><i class="icon-th"></i> 周报提交统计</a></li>

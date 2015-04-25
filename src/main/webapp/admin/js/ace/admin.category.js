@@ -118,7 +118,6 @@ jQuery.adminCategory = {
 	    			dataType : "json",
 	    			success : function(json) {
 	    				if(json.resultMap.state=='success'){
-	    					$("#user_edit_modal").modal('hide');
 	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
 	    					$.adminCategory.initSearchDataTable();
 	    					$("#category_modal").modal('hide');

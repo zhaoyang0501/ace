@@ -26,6 +26,8 @@ public class DetailAction extends ActionSupport{
 		resource=resourceService.find(id);
 		Assert.notNull(resource);
 		resources=resourceService.find(resource.getCategory());
+		resource.setCount(resource.getCount()==null?0:resource.getCount()+1);
+		resourceService.save(resource);
 		isVideo=isAvideoFile(StringUtils.getFilenameExtension(resource.getFilePath()));
 		return SUCCESS;
 	}

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+	<%@ include file="validateLogin.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +16,17 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui-1.8.22.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+	});
+	
+	function go_dofind(){
+		window.location.href="dofind?categoryid=${bean.id }&key="+encodeURI(encodeURI($("#ppt-search").val())); ; 
+	}
+</script>
 </head>
+
 <body>
 	<%@ include file="top.jsp"%>
 	<!----head end -->
@@ -33,22 +46,19 @@
 		<div class="row" style="padding-top: 15px;">
 			<div class="span4 category_list">
 				<ul class="ppt-category-list">
-				<li><a class="selected"  href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:null})">所有资源</a></li>
-				<c:forEach items="${categorys }" var="bean">
-				<li><a  href="javascript:void(0);"
-						onClick="location.href=build_query(location.href,{category:null})">${bean.name }</a></li>
-				</c:forEach>
+						<li><a  <c:if test="${param.categoryid==null||param.categoryid==''}">class="selected"</c:if>  href="find">所有资源</a></li>
+					<c:forEach items="${categorys }" var="bean">
+						<li><a   <c:if test="${param.categoryid==bean.id}">class="selected"</c:if> href="dofind?categoryid=${bean.id }">${bean.name }</a></li>
+					</c:forEach>
 					
 				</ul>
 				<form id="ppt-scbar-form" method="get" action="">
 					<div id="ppt-scbar">
 						<div class="col">
-							<input type="text" name="keyword" id="ppt-search"
-								placeholder="搜索" value="">
+							<input type="text" name="keyword" id="ppt-search" placeholder="搜索" value="">
 						</div>
 						<div class="col">
-							<a class="ppt-scbar-btn"></a>
+							<a class=" icon-search"  onclick="go_dofind()"></a>
 						</div>
 					</div>
 				</form>
@@ -62,7 +72,7 @@
 						<div>
 							<div class="ppt-cover-content">
 								<a href="detail?id=${bean.id}"> 
-								<img width="180" height="135" alt="${bean.name }" src="${pageContext.request.contextPath}/upload/${bean.imgPath}"
+								<img width="180" height="135" alt="${bean.name }" src="${pageContext.request.contextPath}/upload/${bean.imgPath}">
 								</a>
 							</div>
 							<p class="subject">
@@ -70,37 +80,16 @@
 							</p>
 							<div class="ppt-visit-count">
 								<div class="float-left">
-									<span>6803 浏览</span>
+									<span>${bean.count } 浏览</span>
 								</div>
 								<div class="float-right">
-									<span>${bean.createDate }</span>
+									<span><fmt:formatDate value="${bean.createDate}" type="time" dateStyle="full" pattern="yyyy-MM-dd"/></span>
 								</div>
 							</div>
 						</div>
 					</li>
 				</c:forEach>
 				</ul>
-
-
-
-				<div class="pagination">
-					<div class="page_form">
-						到<input type="text" id="page_target" class="page_target">页
-						<input type="button" class="button" onClick="goto_page()"
-							value="确定">
-						<!-- <span class="red tip">此页面不存在</span> -->
-					</div>
-					<ul>
-						<li class="prev disabled"><a href="javascript:void(0);">&lt;</a></li>
-						<li class="active"><a href="javascript:void(0);">1</a></li>
-						<li><a href="http://djt.qq.com/ppt/lists/?page=2">2</a></li>
-						<li><a href="http://djt.qq.com/ppt/lists/?page=3">3</a></li>
-						<li><a href="http://djt.qq.com/ppt/lists/?page=4">4</a></li>
-						<li class="disabled"><a href="javascript:void(0);">...</a></li>
-						<li><a href="http://djt.qq.com/ppt/lists/?page=34">34</a></li>
-						<li><a href="http://djt.qq.com/ppt/lists/?page=2">&gt;</a></li>
-					</ul>
-				</div>
 				<!-- 分页结束 -->
 			</div>
 		</div>

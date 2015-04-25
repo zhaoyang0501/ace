@@ -26,6 +26,7 @@ public class Resource {
 	private Date createDate;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
+	private Integer count;
 	public Long getId() {
 		return id;
 	}
@@ -75,5 +76,10 @@ public class Resource {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
 }

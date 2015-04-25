@@ -40,8 +40,6 @@ public class MyUploadAction extends ActionSupport implements SessionAware {
     private CategoryService categoryService;
 	@Override
 	public void setSession(Map<String, Object> arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 	@Action(value = "deleteResource", results = { @Result( type="redirect" ,name = "success", location = "myupload") })  
 	public String deleteResource(){

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
+	<%@ include file="validateLogin.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -56,6 +57,9 @@
 		<div class="row" style="padding-top: 15px;">
 			<div class="span8">
 				<ul class="article-list">
+				<c:if test="${ resources.size()==0}">
+					<p>目前还没有上传资源</p>
+				</c:if>
 				<c:forEach items="${resources}" var="bean">
 					<li class="article-list-item "> 
 						<div class="item-cover">
@@ -75,7 +79,7 @@
 							<p class="item-summary">${bean.remark }</p>
 							<div class="item-control">
 								<div class="item-oper-info">
-									<span><i class="icon-reading"></i>&nbsp;348浏览&nbsp;&nbsp;</span> 
+									<span><i class="icon-reading"></i>&nbsp;${bean.count }浏览&nbsp;&nbsp;</span> 
 								</div>
 							</div>
 						</div>

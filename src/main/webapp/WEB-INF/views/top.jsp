@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="index-topbar-wrapper">
 		<div class="light-blue-left"></div>
 		<div class="index-topbar clearfix">
@@ -32,7 +32,7 @@
 			<ul class="topbar-nav-list sf-menu" id="djt_menu">
 				<li id="nav_1"><a href="${pageContext.request.contextPath}/index">首页</a></li>
 				<li id="nav_3"><a href="${pageContext.request.contextPath}/find">资源检索</a></li>
-				<li id="nav_6"><a href="http://djt.qq.com/page/178">我的上传</a></li>
+				<li id="nav_6"><a href="${pageContext.request.contextPath}/myupload">我的上传</a></li>
 				<li id="nav_6"><a href="http://djt.qq.com/page/178">个人中心</a></li>
 			</ul>
 		</div>

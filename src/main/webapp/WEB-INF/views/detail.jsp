@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
+	<%@ include file="validateLogin.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -40,6 +41,7 @@
 						<div class="info-item ppt-created-time">
 							发布时间 : ${resource.createDate}
 							发布人 : ${resource.creater.userName}
+							浏览次数 : ${resource.count}
 						</div>
 					</div>
 				</div>
@@ -76,7 +78,7 @@
 							</a>
 							<div class="item-detail">
 								<p class="item-name"><a href="detail?id=${bean.id }">${bean.name }  </a></p>
-								<p class="download-count light-grey">6797 浏览</p>
+								<p class="download-count light-grey">${bean.count } 浏览</p>
 							</div>
 						 </li>
 					</c:forEach>
