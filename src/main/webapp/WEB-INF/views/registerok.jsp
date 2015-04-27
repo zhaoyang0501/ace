@@ -43,7 +43,7 @@
 		<div class="row" style="padding-top: 15px;">
 		
 			<div class="span12" >
-			<h1 style="color: red">注册成功,欢迎使用！</h1>
+			<h1 style="color: red;text-align: center;">注册成功,欢迎使用！</h1>
 					
 			</div>
 		</div>

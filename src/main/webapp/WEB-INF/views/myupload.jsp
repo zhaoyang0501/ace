@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 	<%@ include file="validateLogin.jsp"%>
 <html>
 <head>
@@ -57,7 +58,8 @@
 		<div class="row" style="padding-top: 15px;">
 			<div class="span8">
 				<ul class="article-list">
-				<c:if test="${ resources.size()==0}">
+				
+				<c:if test="${fn:length(resources)==0}">
 					<p>目前还没有上传资源</p>
 				</c:if>
 				<c:forEach items="${resources}" var="bean">

@@ -27,8 +27,9 @@ public class IndexAction  extends ActionSupport{
      }
      @Action(value = "loginout", results = { @Result(name = "success", location = "/WEB-INF/views/admin/login.jsp") })
      public String loginout(){
-    		ActionContext.getContext().getSession().clear();
-          return SUCCESS;
+    	 	ActionContext.getContext().getSession().remove("adminuser");
+    	 	ActionContext.getContext().getSession().clear();
+    	 	return SUCCESS;
      }
      @Action(value = "gologin", results = { @Result(name = "success", location = "/WEB-INF/views/admin/index.jsp"),@Result(name = "input", location = "/WEB-INF/views/admin/login.jsp") })
      public String gologin(){

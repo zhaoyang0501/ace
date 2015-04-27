@@ -29,7 +29,9 @@
 					<li><a href="${pageContext.request.contextPath}/admin/category/index"><i class="icon-upload"></i> 资源分类管理 </a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/resource/index"><i class="icon-zoom-in"></i> 资源管理</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/log/index"><i class="icon-zoom-out"></i>系统日志</a></li>
+					<!--  
 					<li><a href="${pageContext.request.contextPath}/dailyReport/weekReportExport"><i class="icon-download-alt"></i> 数据库备份</a></li>
+					-->
 				</ul>
 			</div>
 		</div>

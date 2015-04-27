@@ -15,9 +15,6 @@
             <result name ="login">/index.jsp</result>
             <result name ="error">/error.jsp</result>
         </global-results >
-          <action name="centerAction" class="centerAction">
-          			<result>/index.jsp</result>
-    		</action>
     </package >
      
 </struts>

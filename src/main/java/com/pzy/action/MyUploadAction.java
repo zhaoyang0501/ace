@@ -25,13 +25,14 @@ import com.pzy.service.UserService;
  
 @ParentPackage("struts-default")  
 public class MyUploadAction extends ActionSupport implements SessionAware {
-	// myFile属性用来封装上传的文件  
     private File imgPath;  
    	private String imgPathContentType;  
     private String imgPathFileName;  
-  
+    /**上传的文件*/
     private File filePath;  
+    /**上传的文件ContentType*/
     private String filePathContentType;  
+    /**上传的文件名*/
     private String filePathFileName; 
     private Resource resource;
     private Long categoryId;

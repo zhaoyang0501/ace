@@ -48,9 +48,15 @@ public class UserAction  extends ActionSupport{
      
     @Action(value = "delete", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
         public String delete(){
-         userService.delete(id);
-         resultMap.put("state", "success");
-         resultMap.put("msg", "删除成功");
+         try {
+			userService.delete(id);
+			 resultMap.put("state", "success");
+	         resultMap.put("msg", "删除成功");
+		} catch (Exception e) {
+			 resultMap.put("state", "error");
+	         resultMap.put("msg", "删除失败，外键约束");
+		}
+         
              return SUCCESS;
         }
     @Action(value = "get", results = { @Result(name = "success", type = "json") }, params = { "contentType", "text/html" })  
@@ -85,28 +91,29 @@ public class UserAction  extends ActionSupport{
           this.resultMap = resultMap;
      }
      public Integer getSEcho() {
-          return sEcho;
-     }
+ 		return sEcho;
+ 	}
 
-     public void setSEcho(Integer sEcho) {
-          this.sEcho = sEcho;
-     }
+ 	public void setSEcho(Integer sEcho) {
+ 		this.sEcho = sEcho;
+ 	}
 
-     public Integer getIDisplayStart() {
-          return iDisplayStart;
-     }
+ 	public Integer getIDisplayStart() {
+ 		return iDisplayStart;
+ 	}
 
-     public void setIdisplayStart(Integer idisplayStart) {
-          this.iDisplayStart = idisplayStart;
-     }
+ 	public void setIDisplayStart(Integer idisplayStart) {
+ 		this.iDisplayStart = idisplayStart;
+ 	}
 
-     public Integer getIDisplayLength() {
-          return iDisplayLength;
-     }
+ 	public Integer getIDisplayLength() {
+ 		return iDisplayLength;
+ 	}
 
-     public void setIDisplayLength(Integer iDisplayLength) {
-          this.iDisplayLength = iDisplayLength;
-     }
+ 	public void setIDisplayLength(Integer iDisplayLength) {
+ 		this.iDisplayLength = iDisplayLength;
+ 	}
+
      public String getUserName() {
           return userName;
      }

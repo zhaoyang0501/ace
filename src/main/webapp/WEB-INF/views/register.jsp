@@ -51,7 +51,6 @@
 				"user.className":"请填写班级",
 				"user.sex":"请选择性别",
 				"user.birthDay":"请选择生日"
-				
 			}
 		});
 		
@@ -114,7 +113,7 @@
 					    <label class="control-label" for="user.birthDay">生日</label>
 					    <div class="controls">
 					      <div class=" input-append date">
-										 <input class="user.birthDay"  type="text" value="" readonly="readonly" >
+										 <input name="user.birthDay"  type="text" value="" readonly="readonly" >
 										 <span class="add-on"><i class="icon-th"></i></span>
 							</div>
 					    </div>

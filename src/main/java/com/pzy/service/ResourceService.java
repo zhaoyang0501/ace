@@ -47,13 +47,20 @@ public class ResourceService {
      public List<Resource> find(Category category){
      	  return (List<Resource>) resourceRepository.findByCategory(category);
      }
-     
+     /***
+      * 查找浏览最多的记录
+      * @return
+      */
      public List<Resource> findHot(){
     	  return resourceRepository.findAll( new PageRequest(0, 8, new Sort(Direction.DESC, "count"))).getContent();
      }
+     /***
+      * 查找最新上传的记录
+      * @return
+      */
      public List<Resource> findNew(){
     	  return resourceRepository.findAll( new PageRequest(0, 8, new Sort(Direction.DESC, "createDate"))).getContent();
-    }
+     }
      public Page<Resource> findAll(final int pageNumber, final int pageSize,final String name,final Long categoryId){
          PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
         

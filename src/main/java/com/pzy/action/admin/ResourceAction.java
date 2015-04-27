@@ -58,12 +58,25 @@ public class ResourceAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
 	@Action(value = "delete", results = { @Result(name = "success", type = "json") }, params = {
 			"contentType", "text/html" })
 	public String delete() {
-		resourceService.delete(id);
-		resultMap.put("state", "success");
-		resultMap.put("msg", "删除成功");
+		try {
+			resourceService.delete(id);
+			resultMap.put("state", "success");
+			resultMap.put("msg", "删除成功");
+		} catch (Exception e) {
+			resultMap.put("state", "error");
+			resultMap.put("msg", "删除失败"+e.getMessage());
+		}
 		return SUCCESS;
 	}
 
@@ -120,7 +133,7 @@ public class ResourceAction extends ActionSupport {
 		return iDisplayStart;
 	}
 
-	public void setIdisplayStart(Integer idisplayStart) {
+	public void setIDisplayStart(Integer idisplayStart) {
 		this.iDisplayStart = idisplayStart;
 	}
 

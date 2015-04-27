@@ -109,7 +109,7 @@ public class CategoryAction extends ActionSupport {
 		return iDisplayStart;
 	}
 
-	public void setIdisplayStart(Integer idisplayStart) {
+	public void setIDisplayStart(Integer idisplayStart) {
 		this.iDisplayStart = idisplayStart;
 	}
 
@@ -120,6 +120,7 @@ public class CategoryAction extends ActionSupport {
 	public void setIDisplayLength(Integer iDisplayLength) {
 		this.iDisplayLength = iDisplayLength;
 	}
+
 
 	public String getName() {
 		return name;

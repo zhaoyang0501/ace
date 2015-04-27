@@ -29,7 +29,7 @@ import com.pzy.service.UserService;
 @ParentPackage("struts-default")  
 public class DoFindAction extends ActionSupport  {
 	private String key;
-	private Long categoryId;
+	private Long categoryid;
 	private List<Category> categorys;
 
 	private List<Resource> resources;
@@ -48,7 +48,7 @@ public class DoFindAction extends ActionSupport  {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		resources=this.resourceService.findAll(1, 1000,key,categoryId).getContent();
+		resources=this.resourceService.findAll(1, 1000,key,categoryid).getContent();
     	categorys=this.categoryService.findAll();
     	logService.save(null,getIp(),"查找了资源 查找关键字为"+key,Log.WARM_LEVEL);	 
 		return SUCCESS;
@@ -77,12 +77,12 @@ public class DoFindAction extends ActionSupport  {
 		this.key = key;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
+	public Long getCategoryid() {
+		return categoryid;
 	}
 
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+	public void setCategoryid(Long categoryId) {
+		this.categoryid = categoryId;
 	}
 	public List<Category> getCategorys() {
 		return categorys;

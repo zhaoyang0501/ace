@@ -92,7 +92,7 @@ jQuery.adminUser = {
 	            if(result){
 	            	$.ajax({
 	        			type : "get",
-	        			url : $.ace.getContextPath() + "/admin/user/list/delete?id="+id,
+	        			url : $.ace.getContextPath() + "/admin/user/delete?id="+id,
 	        			dataType : "json",
 	        			success : function(json) {
 	        				if(json.resultMap.state=='success'){
@@ -117,7 +117,7 @@ jQuery.adminUser = {
 			$("#userid").val(id);
 			$.ajax({
     			type : "get",
-    			url : $.ace.getContextPath() + "/admin/user/list/get?id="+id,
+    			url : $.ace.getContextPath() + "/admin/user/get?id="+id,
     			dataType : "json",
     			success : function(json) {
     				if(json.resultMap.state=='success'){
@@ -138,7 +138,7 @@ jQuery.adminUser = {
 		saveUser: function(id){
 			$.ajax({
     			type : "post",
-    			url : $.ace.getContextPath() + "/admin/user/list/update",
+    			url : $.ace.getContextPath() + "/admin/user/update",
     			data:{
     				"user.id":$("#userid").val(),
     				"user.userName":$("#userName").val(),

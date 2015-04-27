@@ -64,10 +64,12 @@
 										<tr>
 											<th >id</th>
 											<th >名称</th>
+											<th >文件名</th>
 											<th >描述</th>
 											<th >分类</th>
 											<th >上传者</th>
 											<th >上传时间</th>
+											<th >操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -128,7 +130,7 @@
 		
 		<div class="modal-footer center" id="div_footer">
 			<a class="btn btn-primary" onclick="$.adminResource.update()">保存</a>
-			<a href="#" class="btn" data-dismiss="modal" id="closeViewModal">关闭</a>
+			<a href="#"   class="btn" data-dismiss="modal" id="closeViewModal">关闭</a>
 		</div>
 	</div>
 </body>

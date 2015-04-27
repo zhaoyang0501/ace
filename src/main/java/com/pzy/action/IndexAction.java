@@ -100,7 +100,6 @@ public class IndexAction extends ActionSupport implements SessionAware {
     		session.put("user",loginuser );
     		 logService.save(loginuser,getIp(),"登录了系统",Log.INFO_LEVEL);	 
             return SUCCESS; 
-           
     	}
     	else{
     		ActionContext.getContext().getSession().clear();

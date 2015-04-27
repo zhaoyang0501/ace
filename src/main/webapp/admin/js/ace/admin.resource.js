@@ -59,6 +59,8 @@ jQuery.adminResource = {
 					"aoColumns" : [ {
 						"mDataProp" : "id"
 					}, {
+						"mDataProp" : "filePath"
+					}, {
 						"mDataProp" : "name"
 					}, {
 						"mDataProp" : "remark"
@@ -74,10 +76,25 @@ jQuery.adminResource = {
 					}],
 					"aoColumnDefs" : [
 						{
-							'aTargets' : [6],
+							'aTargets' : [1],
+							'fnRender' : function(oObj, sVal) {
+								return "<a href='../detail?id="+oObj.aData.id+"' target='_blank'>"+sVal+"</a>"
+							}
+						},
+						{
+							'aTargets' : [3],
+							'fnRender' : function(oObj, sVal) {
+								if(sVal.length>10)
+									return sVal.substring(0,10)+".....";
+								else 
+									return sVal;
+							}
+						},
+						{
+							'aTargets' : [7],
 							'fnRender' : function(oObj, sVal) {
 								return "<button class=\"btn2 btn-info\" onclick=\"$.adminResource.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>修改</button>"+
-								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminResource.deleteResource("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
+								 "  &nbsp;<button class=\"btn2 btn-info\" onclick=\"$.adminResource.deleteResource("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
 							}
 						},
 					 {
