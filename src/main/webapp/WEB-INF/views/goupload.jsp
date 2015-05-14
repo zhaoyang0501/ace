@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/core.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/spark-md5.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui-1.8.22.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.min.js"></script>
@@ -19,6 +21,23 @@
 <link href="${pageContext.request.contextPath}/css/datetimepicker.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
 <script type="text/javascript">
+	function fileUpload() {
+	    $.ajaxFileUpload( {
+	      url : 'ajaxdoUpload',     //用于文件上传的服务器端请求地址  
+	      secureuri : false,            //一般设置为false  
+	      fileElementId : "file",        //文件上传的id属性  <input type="file" id="file" name="file" />  
+	      dataType : 'text',            //返回值类型 一般设置为json  
+	      success : function(data, status) {
+	    	  alert("fuck");
+	    	  alert(data);
+	        alert(data.tip);
+	      },
+	      error : function(status) { // 服务器响应失败时的处理函数
+	    	  alert(status+"fu33333333ck");
+	      }
+	    })
+	  }
+
 	$(document).ready(function(){
 		$(".date").datetimepicker({
 			language:  'zh-CN',
@@ -50,6 +69,36 @@
 				
 			}
 		});
+		
+		document.getElementById("file").addEventListener("change", function() {
+		    var fileReader = new FileReader(), box = document.getElementById('box');
+		    blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice, file = document.getElementById("file").files[0], chunkSize = 2097152,
+		    // read in chunks of 2MB
+		    chunks = Math.ceil(file.size / chunkSize), currentChunk = 0, spark = new SparkMD5();
+		    fileReader.onload = function(e) {
+		        console.log("read chunk nr", currentChunk + 1, "of", chunks);
+		        spark.appendBinary(e.target.result);
+		        // append binary string
+		        currentChunk++;
+		        if (currentChunk < chunks) {
+		            loadNext();
+		        } else {
+		            console.log("finished loading");
+		          	alert('MD5 hash:' + spark.end());
+		            console.info("computed hash", spark.end());
+		            // compute hash
+		        }
+		    };
+
+		    function loadNext() {
+		        var start = currentChunk * chunkSize, end = start + chunkSize >= file.size ? file.size : start + chunkSize;
+
+		        fileReader.readAsBinaryString(blobSlice.call(file, start, end));
+		    }
+
+		    loadNext();
+		});
+		
 	});
 </script>
 </head>
@@ -100,7 +149,7 @@
 					   <div class="control-group">
 					    <label class="control-label" for="user.school">选择文件</label>
 					    <div class="controls">
-					      <input name='filePath' type="file" class="file">
+					      <input name='file' id='file' type="file" class="file"> <input value="上传" type="button" class="btn" onclick="fileUpload()">
 					    </div>
 					  </div>
 					  
