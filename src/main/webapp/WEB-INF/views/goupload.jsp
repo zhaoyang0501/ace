@@ -22,6 +22,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
 <script type="text/javascript">
 	function fileUpload() {
+		alert("33"+getFileMd5());
+		return;
 	    $.ajaxFileUpload( {
 	      url : 'ajaxdoUpload',     //用于文件上传的服务器端请求地址  
 	      secureuri : false,            //一般设置为false  
@@ -37,7 +39,35 @@
 	      }
 	    })
 	  }
+	
+	function getFileMd5(){
+		var md5;
+		 var fileReader = new FileReader();
+		    blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice;
+		    file = document.getElementById("file").files[0], chunkSize = 2097152,
+		    // read in chunks of 2MB
+		    chunks = Math.ceil(file.size / chunkSize), currentChunk = 0, spark = new SparkMD5();
+		    fileReader.onload = function(e) {
+		        console.log("read chunk nr", currentChunk + 1, "of", chunks);
+		        spark.appendBinary(e.target.result);
+		        currentChunk++;
+		        if (currentChunk < chunks) {
+		            loadNext();
+		        } else {
+		        	md5= spark.end();
+		        	alert("md5-"+md5);
+		        }
+		    };
 
+		    function loadNext() {
+		        var start = currentChunk * chunkSize, end = start + chunkSize >= file.size ? file.size : start + chunkSize;
+		        fileReader.readAsBinaryString(blobSlice.call(file, start, end));
+		    }
+
+		    loadNext();
+		    return md5;
+	}
+	
 	$(document).ready(function(){
 		$(".date").datetimepicker({
 			language:  'zh-CN',
@@ -69,35 +99,34 @@
 				
 			}
 		});
-		
-		document.getElementById("file").addEventListener("change", function() {
-		    var fileReader = new FileReader(), box = document.getElementById('box');
-		    blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice, file = document.getElementById("file").files[0], chunkSize = 2097152,
-		    // read in chunks of 2MB
-		    chunks = Math.ceil(file.size / chunkSize), currentChunk = 0, spark = new SparkMD5();
-		    fileReader.onload = function(e) {
-		        console.log("read chunk nr", currentChunk + 1, "of", chunks);
-		        spark.appendBinary(e.target.result);
-		        // append binary string
-		        currentChunk++;
-		        if (currentChunk < chunks) {
-		            loadNext();
-		        } else {
-		            console.log("finished loading");
-		          	alert('MD5 hash:' + spark.end());
-		            console.info("computed hash", spark.end());
-		            // compute hash
-		        }
-		    };
+		 function readFileMd5CallBack(md5){
+			 alert("callback"+md5);
+		 }
+		 $("#fileupload_btn").click( function() {
+			 alert("fuck");
+			    var fileReader = new FileReader(), box = document.getElementById('box');
+			    blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice, file = document.getElementById("file").files[0], chunkSize = 2097152,
+			    // read in chunks of 2MB
+			    chunks = Math.ceil(file.size / chunkSize), currentChunk = 0, spark = new SparkMD5();
+			    fileReader.onload = function(e) {
+			        console.log("read chunk nr", currentChunk + 1, "of", chunks);
+			        spark.appendBinary(e.target.result);
+			        // append binary string
+			        currentChunk++;
+			        if (currentChunk < chunks) {
+			            loadNext();
+			        } else {
+			        	readFileMd5CallBack(spark.end());
+			        }
+			    };
 
-		    function loadNext() {
-		        var start = currentChunk * chunkSize, end = start + chunkSize >= file.size ? file.size : start + chunkSize;
+			    function loadNext() {
+			        var start = currentChunk * chunkSize, end = start + chunkSize >= file.size ? file.size : start + chunkSize;
+			        fileReader.readAsBinaryString(blobSlice.call(file, start, end));
+			    }
 
-		        fileReader.readAsBinaryString(blobSlice.call(file, start, end));
-		    }
-
-		    loadNext();
-		});
+			    loadNext();
+			});
 		
 	});
 </script>
@@ -109,7 +138,7 @@
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/u_header.js"></script>
 	<div class="container">
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/ppts.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/ppts.css"/>
 		<div class="row" style="padding-top: 15px;">
 		
 			<div class="span12" >
@@ -149,7 +178,7 @@
 					   <div class="control-group">
 					    <label class="control-label" for="user.school">选择文件</label>
 					    <div class="controls">
-					      <input name='file' id='file' type="file" class="file"> <input value="上传" type="button" class="btn" onclick="fileUpload()">
+					      <input name='file' id='file' type="file" class="file"> <input value="上传" id='fileupload_btn' type="button" class="btn" >
 					    </div>
 					  </div>
 					  
