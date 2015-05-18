@@ -10,5 +10,6 @@ import com.pzy.entity.User;
 public interface ResourceRepository extends PagingAndSortingRepository<Resource, Long>,JpaSpecificationExecutor<Resource>{
 	public List<Resource> findByCreaterOrderByCreateDateDesc(User user);
 	public List<Resource> findByCategory(Category user);
+	public List<Resource> findByMd5Str(String md5);
 }
 

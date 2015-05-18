@@ -21,6 +21,8 @@ public class Resource {
 	private String remark;
 	private String imgPath;
 	private String filePath;
+	private String md5Str;
+	private String showall;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User creater;
 	private Date createDate;
@@ -81,5 +83,17 @@ public class Resource {
 	}
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+	public String getMd5Str() {
+		return md5Str;
+	}
+	public void setMd5Str(String md5Str) {
+		this.md5Str = md5Str;
+	}
+	public String getShowall() {
+		return showall;
+	}
+	public void setShowall(String showall) {
+		this.showall = showall;
 	}
 }

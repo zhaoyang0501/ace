@@ -29,6 +29,13 @@ public class ResourceService {
      @Autowired
      private CategoryRepository categoryRepository;
     
+     public Resource getResourceByMd5(String md5){
+    	 List<Resource> list=resourceRepository.findByMd5Str(md5);
+    	 if(list==null||list.size()==0){
+    		 return null;
+    	 }else 
+    		 return list.get(0);
+     }
      public void delete(Long id){
     	 resourceRepository.delete(id);
      }

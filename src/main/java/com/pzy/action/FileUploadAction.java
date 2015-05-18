@@ -33,17 +33,14 @@ public class FileUploadAction extends ActionSupport {
     private String fileFileName; 
 	
     private File filePath;  
-    /**上传的文件ContentType*/
+    private String md5;
+    private Resource resource;
+    
+	private String tip;
+	 /**上传的文件ContentType*/
     private String filePathContentType;  
     /**上传的文件名*/
     private String filePathFileName; 
-    
-    public File getFilePath() {
-		return filePath;
-	}
-	public void setFilePath(File filePath) {
-		this.filePath = filePath;
-	}
 	public String getFilePathContentType() {
 		return filePathContentType;
 	}
@@ -56,7 +53,8 @@ public class FileUploadAction extends ActionSupport {
 	public void setFilePathFileName(String filePathFileName) {
 		this.filePathFileName = filePathFileName;
 	}
-	private String tip;
+	@Autowired
+	private ResourceService resourceService;
     @Action(value = "ajaxdoUpload", results = { @Result(name = "success", type = "json") }, params = {
 			"contentType", "text/html" })
 	public String ajaxdoUpload(){
@@ -72,6 +70,12 @@ public class FileUploadAction extends ActionSupport {
 		}
          tip="上传成功";
 		return SUCCESS;
+	}
+    @Action(value = "findResourceByMd5", results = { @Result(name = "success", type = "json") }, params = {
+			"contentType", "text/html" })
+	public String findResourceByMd5(){
+    	resource=this.resourceService.getResourceByMd5(md5);
+    	return SUCCESS;
 	}
 	public File getFile() {
 		return file;
@@ -97,5 +101,23 @@ public class FileUploadAction extends ActionSupport {
 	public void setTip(String tip) {
 		this.tip = tip;
 	}
-	
+
+    public String getMd5() {
+		return md5;
+	}
+	public void setMd5(String md5) {
+		this.md5 = md5;
+	}
+	public Resource getResource() {
+		return resource;
+	}
+	public void setResource(Resource resource) {
+		this.resource = resource;
+	}
+	public File getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(File filePath) {
+		this.filePath = filePath;
+	}
 }
