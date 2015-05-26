@@ -46,29 +46,33 @@
 					</div>
 				</div>
 			</div>
-			<c:if test="${resource.showall!='否'}">
 				<p>${resource.remark }</p>
 				<c:if test="${isVideo}">
-				<div class="ppt">
-					<div id="flash_content">	
-						<div id="flash_div">
-						<video src="./upload/${resource.filePath }" width="100%" height="100%" controls="controls">您的浏览器不支持此种视频格式。</video> 
-						</div>
-					</div>		
-				</div>
+				<c:if test="${resource.allowPlay=='是'}">
+					<div class="ppt">
+						<div id="flash_content">	
+							<div id="flash_div">
+							<video src="./upload/${resource.filePath }" width="100%" height="100%" controls="controls">您的浏览器不支持此种视频格式。</video> 
+							</div>
+						</div>		
+					</div>
+				</c:if>
+			<c:if test="${resource.allowPlay=='否'}">
+			<h1 style="color: red;">对不起，您无权播放！</h1>
+			</c:if>	
+				
 			</c:if>
-			
+			<c:if test="${resource.allowDownload=='是'}">
 			<div class="ppt-detail">
 				<div class="bshare" id="bshre_element">
 				</div>
 				<div class="ppt-download">
-					<a class="download-btn"  href="./upload/${resource.filePath }"">立即下载</a>
+					<a class="download-btn"  href="./upload/${resource.filePath }">立即下载</a>
 				</div>
 			</div>
 			</c:if>
-			
-			<c:if test="${resource.showall=='否'}">
-			<h1 style="color: red;">对不起，您无权查看或者下载！</h1>
+			<c:if test="${resource.allowDownload=='否'}">
+			<h1 style="color: red;">对不起，您无权下载！</h1>
 			</c:if>
 	</div>
 		<div class="span4">

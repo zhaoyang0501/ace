@@ -23,6 +23,20 @@ public class Resource {
 	private String filePath;
 	private String md5Str;
 	private String showall;
+	private String allowDownload;
+	private String allowPlay;
+	public String getAllowDownload() {
+		return allowDownload;
+	}
+	public void setAllowDownload(String allowDownload) {
+		this.allowDownload = allowDownload;
+	}
+	public String getAllowPlay() {
+		return allowPlay;
+	}
+	public void setAllowPlay(String allowPlay) {
+		this.allowPlay = allowPlay;
+	}
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User creater;
 	private Date createDate;

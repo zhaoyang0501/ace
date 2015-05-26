@@ -157,28 +157,48 @@
 					     	</select>
 					    </div>
 					  </div>
-					   <div class="control-group">
-					    <label class="control-label" for="userName">是否允许别人查看</label>
+					  <div class="control-group">
+					    <label class="control-label" for="userName">是否允许别人下载</label>
 					    <div class="controls">
-					     	<select name='resource.showall' value="${resource.showall}">
+					     	<select name='resource.allowDownload' value="${resource.allowDownload}">
 					     	<option value=""></option>
-					     	<c:if test="${resource.showall=='是'}">
+					     	<c:if test="${resource.allowDownload=='是'}">
 					     		<option selected="selected" value="是">是</option>
 					     		<option value="否">否</option>
 					     	</c:if>
-					     	<c:if test="${resource.showall=='否'}">
+					     	<c:if test="${resource.allowDownload=='否'}">
 					     		<option  value="是">是</option>
 					     		<option selected="selected" value="否">否</option>
 					     	</c:if>	
 					     	
-					     	<c:if test="${resource.showall==null}">
+					     	<c:if test="${resource.allowDownload==null}">
 					     		<option  value="是">是</option>
 					     		<option  value="否">否</option>
 					     	</c:if>	
 					     	</select>
 					    </div>
 					  </div>
-					 
+					  <div class="control-group">
+					    <label class="control-label" for="userName">是否允许别人播放</label>
+					    <div class="controls">
+					     	<select name='resource.allowPlay' value="${resource.allowPlay}">
+					     	<option value=""></option>
+					     	<c:if test="${resource.allowPlay=='是'}">
+					     		<option selected="selected" value="是">是</option>
+					     		<option value="否">否</option>
+					     	</c:if>
+					     	<c:if test="${resource.allowPlay=='否'}">
+					     		<option  value="是">是</option>
+					     		<option selected="selected" value="否">否</option>
+					     	</c:if>	
+					     	
+					     	<c:if test="${resource.allowPlay==null}">
+					     		<option  value="是">是</option>
+					     		<option  value="否">否</option>
+					     	</c:if>	
+					     	</select>
+					    </div>
+					  </div>
 					  <div class="control-group">
 					    <label class="control-label" for="password">缩略图</label>
 					    <div class="controls">
